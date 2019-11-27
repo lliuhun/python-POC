@@ -4,7 +4,7 @@ import requests
 def checkTarget(url):
     import hashlib
     import random
-    TIME_OUT = 200
+    TIME_OUT = 10
     s= str(random.random())
     m = hashlib.md5()
     b = s.encode(encoding='utf-8')
@@ -28,14 +28,15 @@ def checkTarget(url):
     except :
         print('[-] Looks Like Something Wrong.'+url)
 
-
+def main():
+    f = open("url.txt",'r')
+    f1 = open ("res.txt",'w')
+    for line in f.readlines():
+        url = line
+        re = checkTarget(url)
+        if re:
+            f1.write(url)
+    f.close()
+    f1.close()
 if __name__ == '__main__':
-   f = open("url.txt",'r')
-   f1 = open ("res.txt",'w')
-   for line in f.readlines():
-       url = line
-       re = checkTarget(url)
-       if re :
-           f1.write(url)
-   f.close()
-   f1.close()
+    main()
